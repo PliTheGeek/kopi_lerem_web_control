@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Kopi Lerem Monitor</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="page">
+			<nav class="nav">
+				<div class="logo">kopi lerem monitor</div>
+			</nav>
+
+			<header class="hero">
+				<div class="hero-card">
+					<div class="hero-grid">
+						<div class="stat">
+							<p class="stat-label">Humidity</p>
+							<div class="stat-value">
+								<span id="humidity-value">62</span>
+								<span class="stat-unit">%</span>
+							</div>
+							
+						</div>
+						<div class="stat">
+							<p class="stat-label">Temperature</p>
+							<div class="stat-value">
+								<span id="temperature-value">24</span>
+								<span class="stat-unit">C</span>
+							</div>
+							
+						</div>
+					</div>
+					<div class="spark">
+						<div class="spark-line"></div>
+						<p>Last 30 minutes</p>
+					</div>
+				</div>
+			</header>
+
+			<main class="content">
+				<section class="panel secondary panel-status">
+					<div class="panel-head">
+						<h2>Status Perangkat</h2>	
+					</div>
+					<div class="snapshot-grid">
+
+						<div class="snapshot">
+							<p>Misting</p>
+							<h3>On</h3>
+                            <p>Last Active 2 mins ago</p>
+						</div>      
+					</div>
+				</section>
+
+				<section class="panel panel-update">
+					<div class="panel-head">
+						<h2>Update Parameter</h2>
+					</div>
+					<form class="rule-form">
+						<label class="field">
+							<span>Target humidity Minimum (%)</span>
+							<input type="number" inputmode="decimal" placeholder="65" />
+						</label>
+                        <label class="field">
+                            <span>Target humidity Maximum (%)</span>
+                            <input type="number" inputmode="decimal" placeholder="90" />
+                        </label>
+						<label class="field">
+							<span>Target temperature Minimum (C)</span>
+							<input type="number" inputmode="decimal" placeholder="26" />
+						</label>
+                        <label class="field">
+                            <span>Target temperature Maximum (C)</span>
+                            <input type="number" inputmode="decimal" placeholder="23" />
+                        </label>
+						<button class="submit" type="submit">Submit update</button>
+					</form>
+				</section>
+			</main>
+		</div>
+
+		<script src="app.js"></script>
+	</body>
+</html>
