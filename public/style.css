@@ -6,19 +6,23 @@
 
 :root {
 	color-scheme: light;
-	--bg: #f7f3ee;
-	--ink: #1d1b16;
-	--muted: #6d655c;
-	--accent: #e58f45;
-	--accent-dark: #c4702a;
-	--panel: #fff9f2;
-	--line: #e5ded4;
-	--shadow: 0 18px 40px rgba(29, 27, 22, 0.12);
+	--bg: #f8fafc;
+	--ink: #0f172a;
+	--muted: #64748b;
+	--accent: #1a73e8;
+	--accent-dark: #1558d6;
+	--panel: #ffffff;
+	--line: #e2e8f0;
+	--shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
 }
 
 body {
-	font-family: "SN-Pro", sans-serif;
-	background: radial-gradient(circle at top, #fef0da 0%, #f7f3ee 55%, #f3f3f3 100%);
+	font-family: "Plus Jakarta Sans", "SN-Pro", sans-serif;
+	background-color: var(--bg);
+	background-image:
+		radial-gradient(circle at 20% 15%, rgba(26, 115, 232, 0.12), transparent 45%),
+		radial-gradient(circle at 80% 0%, rgba(148, 163, 184, 0.18), transparent 55%),
+		linear-gradient(180deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
 	color: var(--ink);
 	min-height: 100vh;
 }
@@ -40,10 +44,9 @@ body {
 }
 
 .logo {
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.18em;
-	font-size: 14pt;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	font-size: 1rem;
 }
 
 .nav-meta {
@@ -71,7 +74,7 @@ body {
 }
 
 .hero-text h1 {
-	font-family: "SN-Pro", sans-serif;
+	font-family: "Plus Jakarta Sans", "SN-Pro", sans-serif;
 	font-size: clamp(2.2rem, 3vw, 3.2rem);
 	line-height: 1.1;
 }
@@ -101,7 +104,7 @@ body {
 }
 
 .stat {
-	background: #fffdf8;
+	background: #f8fafc;
 	border: 1px solid var(--line);
 	border-radius: 18px;
 	padding: 18px;
@@ -146,7 +149,7 @@ body {
 	flex: 1;
 	height: 8px;
 	border-radius: 999px;
-	background: linear-gradient(90deg, #f4c47a 0%, #e58f45 45%, #f4c47a 100%);
+	background: linear-gradient(90deg, #93c5fd 0%, #1a73e8 45%, #93c5fd 100%);
 	position: relative;
 	overflow: hidden;
 }
@@ -167,18 +170,18 @@ body {
 }
 
 .panel {
-	background: #f3ede0;
+	background: var(--panel);
 	border: 1px solid var(--line);
 	border-radius: 18px;
 	align-content: start;
 	padding: 20px;
 	display: grid;
 	gap: 16px;
-	box-shadow: 0 12px 30px rgba(29, 27, 22, 0.08);
+	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
 
 .panel.secondary {
-	background: #fffdfa;
+	background: #f8fafc;
 }
 
 .panel-head h2 {
@@ -210,7 +213,7 @@ body {
 	padding: 12px 14px;
 	font-family: inherit;
 	font-size: 1rem;
-	background: #fff;
+	background: #ffffff;
 	transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -218,7 +221,7 @@ body {
 .field textarea:focus {
 	outline: none;
 	border-color: var(--accent);
-	box-shadow: 0 0 0 3px rgba(229, 143, 69, 0.2);
+	box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
 }
 
 .field.full {
@@ -231,17 +234,16 @@ body {
 	border-radius: 999px;
 	padding: 12px 20px;
 	background: var(--accent);
-	color: #1d1b16;
+	color: #ffffff;
 	font-weight: 600;
-	letter-spacing: 0.05em;
-	text-transform: uppercase;
+	letter-spacing: 0.02em;
 	cursor: pointer;
 	transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .submit:hover {
 	background: var(--accent-dark);
-	box-shadow: 0 12px 24px rgba(229, 143, 69, 0.35);
+	box-shadow: 0 12px 24px rgba(26, 115, 232, 0.28);
 	transform: translateY(-1px);
 }
 
@@ -262,8 +264,7 @@ body {
 .snapshot p {
 	font-size: 0.85rem;
 	color: var(--muted);
-	text-transform: capitalize;
-	letter-spacing: 0.12em;
+	letter-spacing: 0.08em;
 }
 
 .snapshot h3 {
