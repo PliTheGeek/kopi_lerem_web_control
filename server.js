@@ -17,7 +17,7 @@ const client = mqtt.connect('mqtt://mqtt-broker:1883');
 client.on('connect', () => {
     console.log('Connected to MQTT Broker inside Docker!');
     client.subscribe('greenhouse/#', (err) => {
-        if (!err) console.log('📡 Subscribed to Greenhouse topics');
+        if (!err) console.log('Subscribed to Greenhouse topics');
     });
 });
 
@@ -25,7 +25,7 @@ client.on('message', (topic, message) => {
     const payload = message.toString();
     
     // 1. Muncul di log docker (seperti sekarang)
-    console.log(`📩 New Data [${topic}]: ${payload}`);
+    console.log(`New Data [${topic}]: ${payload}`);
 
     // 2. KIRIM KE WEB DASHBOARD (Real-time)
     // Kita kirim objek berisi topic dan data agar frontend bisa memilah
@@ -38,5 +38,5 @@ client.on('message', (topic, message) => {
 
 // Ganti app.listen menjadi server.listen
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Kopi Lerem Dashboard live at http://20.6.33.91`);
+    console.log(`Kopi Lerem Dashboard live at http://20.6.33.91`);
 });
