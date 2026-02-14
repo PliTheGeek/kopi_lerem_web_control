@@ -88,5 +88,37 @@
 		</div>
 
 		<script src="app.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		
+		<script>
+			const socket = io();
+
+			// Dengarkan event 'mqtt-data' dari server
+			socket.on('mqtt-data', (data) => {
+				console.log("Data diterima:", data);
+
+				// Contoh: Update teks di elemen HTML tertentu
+				// Misal kamu punya <span id="temp">0</span>
+				if (data.topic === 'greenhouse/sensors') {
+					const sensorData = JSON.parse(data.message);
+
+					// Update Angka Live
+					if (document.getElementById('temp')) {
+						document.getElementById('temp').innerText = sensorData.temp;
+					}
+					if (document.getElementById('hum')) {
+						document.getElementById('hum').innerText = sensorData.hum;
+					}
+
+					// Tambahkan ke log monitor di web
+					const logBox = document.getElementById('log-monitor');
+					if (logBox) {
+						const newLog = document.createElement('div');
+						newLog.innerHTML = `[${data.time}] <b>${data.topic}</b>: ${data.message}`;
+						logBox.prepend(newLog); // Data terbaru di paling atas
+					}
+				}
+			});
+		</script>
 	</body>
 </html>
