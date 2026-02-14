@@ -1,3 +1,4 @@
+const socket = io('http://20.6.33.91');
 socket.on('mqtt-data', (data) => {
     console.log("Menerima update dari Wonosobo:", data);
 
