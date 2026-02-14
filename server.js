@@ -1,12 +1,12 @@
 const express = require('express');
 const mqtt = require('mqtt');
 const path = require('path');
-const http = require('http'); // Tambah ini
-const { Server } = require('socket.io'); // Tambah ini
+const http = require('http'); 
+const { Server } = require('socket.io'); 
 
 const app = express();
-const server = http.createServer(app); // Bungkus app dengan http server
-const io = new Server(server); // Inisialisasi Socket.io
+const server = http.createServer(app); 
+const io = new Server(server); 
 const PORT = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -24,11 +24,11 @@ client.on('connect', () => {
 client.on('message', (topic, message) => {
     const payload = message.toString();
     
-    // 1. Muncul di log docker (seperti sekarang)
+    // 1. Muncul di log docker 
     console.log(`New Data [${topic}]: ${payload}`);
 
-    // 2. KIRIM KE WEB DASHBOARD (Real-time)
-    // Kita kirim objek berisi topic dan data agar frontend bisa memilah
+    // 2. KIRIM KE WEB DASHBOARD 
+    
     io.emit('mqtt-data', {
         topic: topic,
         message: payload,
