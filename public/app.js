@@ -1,5 +1,5 @@
 // Inisialisasi koneksi socket
-const socket = io();
+const socket = io('http://20.6.33.91');
 
 // PASTIKAN: Nama event harus sama dengan io.emit di server.js ('mqtt-data')
 socket.on('mqtt-data', (data) => {
