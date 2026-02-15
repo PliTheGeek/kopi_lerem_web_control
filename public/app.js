@@ -20,10 +20,6 @@ socket.on('mqtt-data', (data) => {
                 tempElement.innerText = payload.temp;
             }
 
-            const targetInfoElement = document.getElementById('target-info');
-            if (targetInfoElement && payload.target_hum !== undefined) {
-                 targetInfoElement.innerText = payload.target_hum;
-            }
 
         } catch (e) {
             console.error("Format data rusak atau bukan JSON:", e);
