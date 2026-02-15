@@ -1,6 +1,6 @@
 const socket = io('http://20.6.33.91');
 socket.on('mqtt-data', (data) => {
-    // console.log("Menerima update dari Wonosobo:", data);
+    console.log("Menerima update dari Wonosobo:", data);
 
     // Filter topik sesuai yang dikirim ESP32
     if (data.topic === 'greenhouse/sensors') {
