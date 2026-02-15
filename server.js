@@ -36,6 +36,27 @@ client.on('message', (topic, message) => {
     });
 });
 
+//  Handling Callback
+
+io.on('connection', (socket) => {
+    // Listener khusus saat Web Dashboard mengirim perintah update
+    socket.on('update_settings', (data) => {
+        console.log('Menerima perintah update dari Web:', data);
+
+        // 1. Publish Target Humidity ke ESP32
+        if (data.target) {
+            client.publish('kopilerem/set_hum_target', String(data.target));
+            console.log('-> Publish ke MQTT: kopilerem/set_hum_target');
+        }
+
+        // 2. Publish Histeresis ke ESP32
+        if (data.hysteresis) {
+            client.publish('kopilerem/set_hum_hyst', String(data.hysteresis));
+            console.log('-> Publish ke MQTT: kopilerem/set_hum_hyst');
+        }
+    });
+});
+
 // Ganti app.listen menjadi server.listen
 server.listen(PORT, '0.0.0.0', () => {
     console.log(`Kopi Lerem Dashboard live at http://20.6.33.91`);

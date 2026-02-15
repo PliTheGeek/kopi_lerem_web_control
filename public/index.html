@@ -66,22 +66,14 @@
 					</div>
 					<form class="rule-form">
 						<label class="field">
-							<span>Target humidity Minimum (%)</span>
-							<input type="number" inputmode="decimal" placeholder="65" />
+							<span>Target humidity (%)</span>
+							<input type="number" id="targetHumInput" inputmode="decimal" placeholder="65" />
 						</label>
                         <label class="field">
-                            <span>Target humidity Maximum (%)</span>
-                            <input type="number" inputmode="decimal" placeholder="90" />
+                            <span>Hysteresis (%)</span>
+                            <input type="number" id="hystInput" inputmode="decimal" placeholder="90" />
                         </label>
-						<label class="field">
-							<span>Target temperature Minimum (C)</span>
-							<input type="number" inputmode="decimal" placeholder="26" />
-						</label>
-                        <label class="field">
-                            <span>Target temperature Maximum (C)</span>
-                            <input type="number" inputmode="decimal" placeholder="23" />
-                        </label>
-						<button class="submit" type="submit">Submit update</button>
+						<button onclick="updateSettings()" class="submit" type="submit">Update Rules</button>
 					</form>
 				</section>
 			</main>
