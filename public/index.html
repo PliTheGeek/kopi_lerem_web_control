@@ -64,17 +64,22 @@
 					<div class="panel-head">
 						<h2>Update Parameter</h2>
 					</div>
-					<form class="rule-form">
+				
+					<div class="rule-form">
+				
 						<label class="field">
 							<span>Target humidity (%)</span>
-							<input type="number" id="targetHumInput" inputmode="decimal" placeholder="65" />
+							<input type="number" id="targetHumInput" inputmode="decimal" placeholder="Contoh: 65" />
 						</label>
-                        <label class="field">
-                            <span>Hysteresis (%)</span>
-                            <input type="number" id="hystInput" inputmode="decimal" placeholder="90" />
-                        </label>
-						<button onclick="updateSettings()" class="submit" type="submit">Update Rules</button>
-					</form>
+				
+						<label class="field">
+							<span>Hysteresis (%)</span>
+							<input type="number" id="hystInput" inputmode="decimal" placeholder="Contoh: 5" />
+						</label>
+				
+						<button onclick="updateSettings()" class="submit" type="button">Update Rules</button>
+				
+					</div>
 				</section>
 			</main>
 		</div>
