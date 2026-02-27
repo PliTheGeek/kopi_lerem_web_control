@@ -5,19 +5,35 @@ socket.on('mqtt-data', (data) => {
     // Filter topik sesuai yang dikirim ESP32
     if (data.topic === 'greenhouse/sensors') {
         try {
-            // Membongkar bungkusan JSON dari string menjadi object
+            // Parsing data JSON dari ESP32
             const payload = JSON.parse(data.message);
 
-            // Update Humidity ke <span id="humidity-value">
+            // Update Humidity 
             const humidityElement = document.getElementById('humidity-value');
             if (humidityElement && payload.hum !== undefined) {
                 humidityElement.innerText = payload.hum;
             }
 
-            // Update Temperature ke <span id="temperature-value">
+            // Update Misting Status
+
+            const mistingElement = document.getElementById('misting-status');
+            if (mistingElement && payload.misting !== undefined) {
+                mistingElement.innerText = payload.misting;
+                
+                // Opsional: Beri warna (Hijau jika ON, Merah jika OFF)
+                mistingElement.style.color = (payload.misting === "ON") ? "#2ecc71" : "#e74c3c";
+            }
+
+            // Update Temperature 
             const tempElement = document.getElementById('temperature-value');
             if (tempElement && payload.temp !== undefined) {
                 tempElement.innerText = payload.temp;
+            }
+
+            // Update Last Active Time
+            const lastActiveElement = document.getElementById('last-active');
+            if (lastActiveElement) {
+                lastActiveElement.innerText = `Last Active : ${new Date().toLocaleTimeString()}`;
             }
 
 

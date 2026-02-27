@@ -33,25 +33,25 @@ client.on('message', (topic, message) => {
         try {
             const data = JSON.parse(payloadStr);
 
-            // Cek apakah status Relay BERUBAH dari sebelumnya?
-            // (Kita baca field 'target_hum' yang isinya "ON"/"OFF")
+            
+            // Log Perubahan Status Sensor 
             if (data.target_hum && data.target_hum !== lastRelayStatus) {
                 console.log("\n========================================");
-                console.log(`⚠️  PERUBAHAN STATUS DETECTED!`);
-                console.log(`🕒  Waktu: ${new Date().toLocaleTimeString()}`);
-                console.log(`🔌  Status: [ ${lastRelayStatus} ]  --->  [ ${data.target_hum} ]`);
-                console.log(`💧  Kondisi: Hum ${data.hum}% / Temp ${data.temp}°C`);
+                console.log(`  PERUBAHAN STATUS DETECTED!`);
+                console.log(`  Waktu: ${new Date().toLocaleTimeString()}`);
+                console.log(`  Status: [ ${lastRelayStatus} ]  --->  [ ${data.target_hum} ]`);
+                console.log(`  Kondisi: Hum ${data.hum}% / Temp ${data.temp}°C`);
                 console.log("========================================\n");
                 
                 // Update ingatan server
                 lastRelayStatus = data.target_hum;
             }
             
-            // Note: Kalau mau lihat data mentah tiap detik, uncomment baris bawah ini:
+            // Note: Melihat Data Log Sensor Setiap Update:
             // console.log(`New Data [${topic}]: ${payloadStr}`);
 
         } catch (e) {
-            // Kalau bukan JSON (data sampah/error), print aja biar tau
+            // Note : Log Data Mentah Jika Parsing Gagal
             console.log(`Raw Data [${topic}]: ${payloadStr}`);
         }
     }
@@ -72,9 +72,9 @@ io.on('connection', (socket) => {
         
         // Log Cantik saat User Mengubah Setting
         console.log("\n----------------------------------------");
-        console.log("🛠️  USER MENGUBAH PARAMETER (Web -> MQTT)");
-        console.log(`🎯  Target Humidity : ${data.target}%`);
-        console.log(`↔️  Hysteresis      : ${data.hysteresis}%`);
+        console.log("  USER MENGUBAH PARAMETER (Web -> MQTT)");
+        console.log(`  Target Humidity : ${data.target}%`);
+        console.log(`  Hysteresis      : ${data.hysteresis}%`);
         console.log("----------------------------------------\n");
 
         // 1. Publish Target Humidity ke ESP32
