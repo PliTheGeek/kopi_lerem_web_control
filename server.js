@@ -37,10 +37,10 @@ client.on('message', (topic, message) => {
             // Log Perubahan Status Sensor 
             if (data.target_hum && data.target_hum !== lastRelayStatus) {
                 console.log("\n========================================");
-                console.log(`  PERUBAHAN STATUS DETECTED!`);
-                console.log(`  Waktu: ${new Date().toLocaleTimeString()}`);
-                console.log(`  Status: [ ${lastRelayStatus} ]  --->  [ ${data.target_hum} ]`);
-                console.log(`  Kondisi: Hum ${data.hum}% / Temp ${data.temp}°C`);
+                console.log(` PERUBAHAN STATUS DETECTED!`);
+                console.log(` Waktu: ${new Date().toLocaleTimeString()}`);
+                console.log(` Status: [ ${lastRelayStatus} ]  --->  [ ${data.target_hum} ]`);
+                console.log(` Kondisi: Hum ${data.hum}% / Temp ${data.temp}°C`);
                 console.log("========================================\n");
                 
                 // Update ingatan server
@@ -48,7 +48,7 @@ client.on('message', (topic, message) => {
             }
             
             // Note: Melihat Data Log Sensor Setiap Update:
-            // console.log(`New Data [${topic}]: ${payloadStr}`);
+            console.log(`New Data [${topic}]: ${payloadStr}`);
 
         } catch (e) {
             // Note : Log Data Mentah Jika Parsing Gagal
@@ -72,9 +72,9 @@ io.on('connection', (socket) => {
         
         // Log Cantik saat User Mengubah Setting
         console.log("\n----------------------------------------");
-        console.log("  USER MENGUBAH PARAMETER (Web -> MQTT)");
-        console.log(`  Target Humidity : ${data.target}%`);
-        console.log(`  Hysteresis      : ${data.hysteresis}%`);
+        console.log(" USER MENGUBAH PARAMETER (Web -> MQTT)");
+        console.log(` Target Humidity : ${data.target}%`);
+        console.log(` Hysteresis      : ${data.hysteresis}%`);
         console.log("----------------------------------------\n");
 
         // 1. Publish Target Humidity ke ESP32
