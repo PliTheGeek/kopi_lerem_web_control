@@ -1,0 +1,28 @@
+name: Deploy Web App via Git Pull
+
+on:
+  push:
+    branches:
+      - deploy 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Eksekusi Git Pull di Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PASSWORD }}
+          script: |
+            echo "Tersambung ke server, mulai proses deploy..."
+            # Pindah ke direktori web-app kamu di server
+            sudo su
+            cd /root/iot-stack/web-app
+            
+            # Tarik kode terbaru
+            git pull origin deploy
+            
+            # (Opsional) Kalau kamu butuh restart docker web-app-nya setelah pull:
+            # docker-compose restart nama-service-web-app
