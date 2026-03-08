@@ -27,7 +27,7 @@
 								<span id="humidity-value">--</span>
 								<span class="stat-unit">%</span>
 							</div>
-							<p class="stat-caption">Suhu Min: <span id="humidity-min">--</span>% • Suhu Max: <span id="humidity-max">--</span>%</p>
+							<p class="stat-caption">Min: <span id="humidity-min">--</span>% • Max: <span id="humidity-max">--</span>%</p>
 						</div>
 						<div class="stat">
 							<p class="stat-label">Temperature</p>
@@ -35,12 +35,23 @@
 								<span id="temperature-value">--</span>
 								<span class="stat-unit">C</span>
 							</div>
-							<p class="stat-caption">Suhu Min: <span id="temperature-min">--</span>°C • Suhu Max: <span id="temperature-max">--</span>°C</p>
+							<p class="stat-caption">Min: <span id="temperature-min">--</span>°C • Max: <span id="temperature-max">--</span>°C</p>
 						</div>
 					</div>
-					<div class="spark">
-						<div class="spark-line"></div>
-						<p>Last 30 minutes</p>
+					<div class="chart-panel">
+						<div class="chart-head">
+							<p>Daily Temperature & Humidity Trend</p>
+							<span id="chart-day-label">Today</span>
+						</div>
+						<div class="daily-metrics">
+							<div class="metric-chip"><span>Temp High</span><strong id="daily-temp-high">--</strong></div>
+							<div class="metric-chip"><span>Temp Low</span><strong id="daily-temp-low">--</strong></div>
+							<div class="metric-chip"><span>Hum High</span><strong id="daily-hum-high">--</strong></div>
+							<div class="metric-chip"><span>Hum Low</span><strong id="daily-hum-low">--</strong></div>
+						</div>
+						<div class="chart-wrap">
+							<canvas id="temperature-chart" aria-label="Daily temperature line chart"></canvas>
+						</div>
 					</div>
 				</div>
 			</header>
@@ -85,6 +96,7 @@
 		</div>
 		
 		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script src="app.js"></script>
 		
 		
