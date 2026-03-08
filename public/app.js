@@ -1,4 +1,36 @@
 const socket = io('http://20.6.33.91');
+
+let humidityMin = null;
+let humidityMax = null;
+let temperatureMin = null;
+let temperatureMax = null;
+
+function updateMinMaxDisplay(type, value) {
+    if (typeof value !== 'number' || Number.isNaN(value)) {
+        return;
+    }
+
+    if (type === 'humidity') {
+        humidityMin = humidityMin === null ? value : Math.min(humidityMin, value);
+        humidityMax = humidityMax === null ? value : Math.max(humidityMax, value);
+
+        const minElement = document.getElementById('humidity-min');
+        const maxElement = document.getElementById('humidity-max');
+        if (minElement) minElement.innerText = humidityMin;
+        if (maxElement) maxElement.innerText = humidityMax;
+    }
+
+    if (type === 'temperature') {
+        temperatureMin = temperatureMin === null ? value : Math.min(temperatureMin, value);
+        temperatureMax = temperatureMax === null ? value : Math.max(temperatureMax, value);
+
+        const minElement = document.getElementById('temperature-min');
+        const maxElement = document.getElementById('temperature-max');
+        if (minElement) minElement.innerText = temperatureMin;
+        if (maxElement) maxElement.innerText = temperatureMax;
+    }
+}
+
 socket.on('mqtt-data', (data) => {
     console.log("Menerima update dari Wonosobo:", data);
 
@@ -12,6 +44,7 @@ socket.on('mqtt-data', (data) => {
             const humidityElement = document.getElementById('humidity-value');
             if (humidityElement && payload.hum !== undefined) {
                 humidityElement.innerText = payload.hum;
+                updateMinMaxDisplay('humidity', Number(payload.hum));
             }
 
             // Update Misting Status
@@ -28,6 +61,7 @@ socket.on('mqtt-data', (data) => {
             const tempElement = document.getElementById('temperature-value');
             if (tempElement && payload.temp !== undefined) {
                 tempElement.innerText = payload.temp;
+                updateMinMaxDisplay('temperature', Number(payload.temp));
             }
 
             // Update Last Active Time
