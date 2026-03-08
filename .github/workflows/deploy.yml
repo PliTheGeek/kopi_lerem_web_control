@@ -18,11 +18,8 @@ jobs:
           script: |
             echo "Tersambung ke server, mulai proses deploy..."
             # Pindah ke direktori web-app kamu di server
-            sudo su
-            cd /root/iot-stack/web-app
             
-            # Tarik kode terbaru
-            git pull origin deploy
+            sudo bash -c "cd /root/iot-stack/web-app && git pull origin deploy"
             
             # (Opsional) Kalau kamu butuh restart docker web-app-nya setelah pull:
             # docker-compose restart nama-service-web-app
