@@ -298,3 +298,7 @@ function updateSettings() {
 
     alert("Rule Baru Ditambahkan Ke IoT");
 }
+
+function downloadPdfReport() {
+    window.open('/api/download-pdf', '_blank');
+}
