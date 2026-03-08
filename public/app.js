@@ -17,6 +17,13 @@ const humiditySeries = [];
 let temperatureChart = null;
 const maxPoints = 300;
 
+function formatTwoDecimals(value) {
+    if (typeof value !== 'number' || Number.isNaN(value)) {
+        return '--';
+    }
+    return value.toFixed(2);
+}
+
 function getDayKey(dateObj) {
     return `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()}`;
 }
@@ -73,6 +80,17 @@ function initializeChart() {
                         usePointStyle: true,
                         boxWidth: 8
                     }
+                },
+                tooltip: {
+                    callbacks: {
+                        label(context) {
+                            const value = context.parsed.y;
+                            if (context.dataset.yAxisID === 'yTemp') {
+                                return ` Temperature: ${formatTwoDecimals(value)}°C`;
+                            }
+                            return ` Humidity: ${formatTwoDecimals(value)}%`;
+                        }
+                    }
                 }
             },
             scales: {
@@ -88,7 +106,7 @@ function initializeChart() {
                     position: 'left',
                     ticks: {
                         callback(value) {
-                            return `${value}°C`;
+                            return `${formatTwoDecimals(Number(value))}°C`;
                         }
                     }
                 },
@@ -99,7 +117,7 @@ function initializeChart() {
                     },
                     ticks: {
                         callback(value) {
-                            return `${value}%`;
+                            return `${formatTwoDecimals(Number(value))}%`;
                         }
                     }
                 }
@@ -144,10 +162,10 @@ function updateDailyStatsDisplay() {
     const dailyHumHighElement = document.getElementById('daily-hum-high');
     const dailyHumLowElement = document.getElementById('daily-hum-low');
 
-    if (dailyTempHighElement) dailyTempHighElement.innerText = dailyTempHigh === null ? '--' : `${dailyTempHigh}°C`;
-    if (dailyTempLowElement) dailyTempLowElement.innerText = dailyTempLow === null ? '--' : `${dailyTempLow}°C`;
-    if (dailyHumHighElement) dailyHumHighElement.innerText = dailyHumHigh === null ? '--' : `${dailyHumHigh}%`;
-    if (dailyHumLowElement) dailyHumLowElement.innerText = dailyHumLow === null ? '--' : `${dailyHumLow}%`;
+    if (dailyTempHighElement) dailyTempHighElement.innerText = dailyTempHigh === null ? '--' : `${formatTwoDecimals(dailyTempHigh)}°C`;
+    if (dailyTempLowElement) dailyTempLowElement.innerText = dailyTempLow === null ? '--' : `${formatTwoDecimals(dailyTempLow)}°C`;
+    if (dailyHumHighElement) dailyHumHighElement.innerText = dailyHumHigh === null ? '--' : `${formatTwoDecimals(dailyHumHigh)}%`;
+    if (dailyHumLowElement) dailyHumLowElement.innerText = dailyHumLow === null ? '--' : `${formatTwoDecimals(dailyHumLow)}%`;
 }
 
 function updateDailyStats(type, value, timestamp) {
@@ -204,8 +222,8 @@ function updateMinMaxDisplay(type, value) {
 
         const minElement = document.getElementById('humidity-min');
         const maxElement = document.getElementById('humidity-max');
-        if (minElement) minElement.innerText = humidityMin;
-        if (maxElement) maxElement.innerText = humidityMax;
+        if (minElement) minElement.innerText = formatTwoDecimals(humidityMin);
+        if (maxElement) maxElement.innerText = formatTwoDecimals(humidityMax);
     }
 
     if (type === 'temperature') {
@@ -214,8 +232,8 @@ function updateMinMaxDisplay(type, value) {
 
         const minElement = document.getElementById('temperature-min');
         const maxElement = document.getElementById('temperature-max');
-        if (minElement) minElement.innerText = temperatureMin;
-        if (maxElement) maxElement.innerText = temperatureMax;
+        if (minElement) minElement.innerText = formatTwoDecimals(temperatureMin);
+        if (maxElement) maxElement.innerText = formatTwoDecimals(temperatureMax);
     }
 }
 
@@ -235,9 +253,9 @@ socket.on('mqtt-data', (data) => {
             // Update Humidity 
             const humidityElement = document.getElementById('humidity-value');
             if (humidityElement && payload.hum !== undefined) {
-                humidityElement.innerText = payload.hum;
                 const humValue = Number(payload.hum);
                 latestHumidityValue = Number.isNaN(humValue) ? null : humValue;
+                humidityElement.innerText = latestHumidityValue === null ? '--' : formatTwoDecimals(latestHumidityValue);
                 updateMinMaxDisplay('humidity', humValue);
                 updateDailyStats('humidity', humValue, now);
             }
@@ -255,9 +273,9 @@ socket.on('mqtt-data', (data) => {
             // Update Temperature 
             const tempElement = document.getElementById('temperature-value');
             if (tempElement && payload.temp !== undefined) {
-                tempElement.innerText = payload.temp;
                 const tempValue = Number(payload.temp);
                 latestTemperatureValue = Number.isNaN(tempValue) ? null : tempValue;
+                tempElement.innerText = latestTemperatureValue === null ? '--' : formatTwoDecimals(latestTemperatureValue);
                 updateMinMaxDisplay('temperature', tempValue);
                 updateDailyStats('temperature', tempValue, now);
             }
@@ -297,4 +315,8 @@ function updateSettings() {
     });
 
     alert("Rule Baru Ditambahkan Ke IoT");
+}
+
+function downloadPdfReport() {
+    window.open('/api/download-pdf', '_blank');
 }

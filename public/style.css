@@ -144,12 +144,15 @@ body {
 	background: #f8fafc;
 	display: grid;
 	gap: 12px;
+	width: 100%;
+	min-width: 0;
 }
 
 .chart-head {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
 	gap: 12px;
 	font-size: 0.85rem;
 	color: var(--muted);
@@ -158,12 +161,15 @@ body {
 .chart-head p {
 	font-weight: 600;
 	color: var(--ink);
+	min-width: 0;
+	overflow-wrap: anywhere;
 }
 
 .daily-metrics {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
 	gap: 10px;
+	width: 100%;
 }
 
 .metric-chip {
@@ -173,6 +179,7 @@ body {
 	background: #ffffff;
 	display: grid;
 	gap: 4px;
+	min-width: 0;
 }
 
 .metric-chip span {
@@ -190,6 +197,13 @@ body {
 .chart-wrap {
 	height: 220px;
 	position: relative;
+	width: 100%;
+	min-width: 0;
+}
+
+.chart-wrap canvas {
+	width: 100% !important;
+	max-width: 100%;
 }
 
 .content {
@@ -338,6 +352,11 @@ body {
 
 	.daily-metrics {
 		grid-template-columns: 1fr;
+	}
+
+	.chart-head {
+		flex-direction: column;
+		align-items: flex-start;
 	}
 
 	.chart-wrap {
