@@ -14,7 +14,7 @@ const DATA_DIR = path.join(__dirname, 'data');
 const SENSOR_LOG_FILE = path.join(DATA_DIR, 'sensor-history.json');
 const MAX_RECORDS = 5000;
 
-// --- VARIABEL INGATAN STATUS (Supaya gak spam log) ---
+// --- VARIABEL INGATAN STATUS  ---
 let lastRelayStatus = "UNKNOWN"; 
 let sensorHistory = [];
 let saveTimeout = null;
