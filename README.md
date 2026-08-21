@@ -1,6 +1,6 @@
 # Kopi Lerem Web Control
 
-[Deskripsi singkat tentang proyek ini, misalnya: Sistem kontrol berbasis web untuk manajemen operasional Kopi Lerem atau otomasi perangkat terkait.]
+
 
 ## 🚀 Deskripsi
 Proyek ini dikembangkan untuk mempermudah [tujuan proyek, misal: monitoring data/pengaturan perangkat/manajemen pesanan] di Kopi Lerem melalui antarmuka web yang responsif dan mudah digunakan.
